@@ -29,6 +29,8 @@ public class Util {
 
     public static final String RETRIEVE_STORY = "http://codeogic.esy.es/negruption/retrieve_story.php";
 
+    public static final String RETRIEVE_LOCATION = "http://codeogic.esy.es/negruption/retrieve_location.php";
+
     public static final String PREFS_NAME="negruption";
     public static final String PREFS_KEYUSERID = "keyUserId";
     public static final String PREFS_KEYUSERNAME="keyUsername";

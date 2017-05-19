@@ -124,6 +124,8 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_honestStories) {
 
         } else if (id == R.id.nav_location) {
+            Intent i=new Intent(HomeActivity.this,MapsActivity.class);
+            startActivity(i);
 
         } else if (id == R.id.nav_manageAccount) {
 

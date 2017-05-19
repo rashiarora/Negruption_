@@ -115,6 +115,7 @@ public class AddStoryActivity extends AppCompatActivity implements View.OnClickL
 
         userId = sharedPreferences.getInt(Util.PREFS_KEYUSERID,0);
 
+        textViewHonestOfficer.setOnClickListener(this);
 
 
     }
@@ -135,7 +136,10 @@ public class AddStoryActivity extends AppCompatActivity implements View.OnClickL
 
 
 
-
+       }
+       else if(v.getId()== R.id.textViewHonestOfficer){
+           Intent intent = new Intent(this,HonestStoryActivity.class);
+           startActivity(intent);
        }
 
     }
