@@ -164,32 +164,37 @@ public class HomeActivity extends AppCompatActivity
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray jsonArray = jsonObject.getJSONArray("stories");
 
-                    int  sid=0,views=0;
-                    String username="",title="",description="",privacy="",u="Anonymous",category ="";
+                    int  sid=0,views =0;
+                    String username="",title="",description="",privacy="",dep = " ",pl = " ",u = "", img = " ", aud = " ", vid = " ", cat = " ";
 
-                    for(int i=0;i<jsonArray.length();i++) {
+
+                    for(int i=0;i<jsonArray.length();i++){
                         JSONObject jObj = jsonArray.getJSONObject(i);
 
                         username = jObj.getString("name");
                         sid = jObj.getInt("storyId");
                         title = jObj.getString("storyTitle");
                         description = jObj.getString("storyDesc");
+                        dep = jObj.getString("department");
+                        pl = jObj.getString("place");
                         privacy = jObj.getString("privacy");
-                        category = jObj.getString("category");
+                        img = jObj.getString("imageProof");
+                        aud = jObj.getString("audioProof");
+                        vid = jObj.getString("videoProof");
+                        cat = jObj.getString("category");
                         views = jObj.getInt("views");
 
-                        if (category.equals("Corrupt")) {
+                        if (privacy.equals("Anonymous"))
+                            u = "Anonymous";
+                        else
+                            u = username;
 
-                            if (privacy.equals("Anonymous")) {
-                                stories.add(new StoryBean(0, sid, title, null, null, description, null, null, null, u,views));
-                            } else {
-                                Log.i("name", username);
-                                stories.add(new StoryBean(0, sid, title, null, null, description, null, null, null, username,views));
-                            }
 
+                        if(cat.equals("Corrupt")){
+                            stories.add(new StoryBean(0,sid,title,dep,pl,description,img,aud,vid,u,views));
                         }
-                    }
 
+                    }
                     adapter = new StoryAdapter(HomeActivity.this,R.layout.stories_list_item,stories);
 
                     listStories.setAdapter(adapter);
@@ -201,6 +206,8 @@ public class HomeActivity extends AppCompatActivity
                     progressDialog.dismiss();
                     Toast.makeText(HomeActivity.this,"Some Exception"+ e,Toast.LENGTH_LONG).show();
                 }
+
+
 
 
             }

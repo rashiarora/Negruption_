@@ -76,7 +76,10 @@ public class StoryAdapter extends ArrayAdapter<StoryBean> {
                 if(v.getId() == R.id.textViewReadMore){
                     Toast.makeText(getContext(),"Read More",Toast.LENGTH_LONG).show();
                     views = story.getViews();
-                    newView = views++;
+                    newView = views+1;
+                    Intent intent = new Intent(getContext(),StoryActivity.class);
+                    intent.putExtra("keyStory",story);
+                    getContext().startActivity(intent);
                     Task t = new Task();
                     t.execute();
                 }

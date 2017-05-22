@@ -76,7 +76,8 @@
             android:label="@string/title_activity_maps" />
         <activity android:name=".ManageAccountActivity" />
         <activity android:name=".RetrieveHonestStory" />
-        <activity android:name=".DetailedHonestActivity"></activity>
+        <activity android:name=".DetailedHonestActivity" />
+        <activity android:name=".StoryActivity"></activity>
     </application>
 
 </manifest>
