@@ -10,7 +10,7 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 
 /**
- * Created by win-7 on 5/3/2017.
+ * Created by Admin on 5/3/2017.
  */
 
 public class Util {
@@ -21,6 +21,8 @@ public class Util {
 
     public static final String INSERT_STORY = "http://codeogic.esy.es/negruption/insertStories.php";
 
+    public static final String INSERT_HONEST_STORY = "http://codeogic.esy.es/negruption/honest_stories.php";
+
     public static final String urlImageUpload = "http://codeogic.esy.es/negruption/attachment_upload.php";
 
     public static final String urlAudioUpload = "http://codeogic.esy.es/negruption/upload_audio.php";
@@ -29,7 +31,15 @@ public class Util {
 
     public static final String RETRIEVE_STORY = "http://codeogic.esy.es/negruption/retrieve_story.php";
 
+    public static final String RETRIEVE_USER = "http://codeogic.esy.es/negruption/retrieve_users.php";
+
     public static final String RETRIEVE_LOCATION = "http://codeogic.esy.es/negruption/retrieve_location.php";
+
+    public static final String DELETE_USER = "http://codeogic.esy.es/negruption/delete_user.php";
+
+    public static final String UPDATE_USER = "http://codeogic.esy.es/negruption/update_user.php";
+
+    public static final String UPDATE_VIEWS = "http://codeogic.esy.es/negruption/update_views.php";
 
     public static final String PREFS_NAME="negruption";
     public static final String PREFS_KEYUSERID = "keyUserId";

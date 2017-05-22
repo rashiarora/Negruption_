@@ -122,12 +122,16 @@ public class HomeActivity extends AppCompatActivity
 
 
         } else if (id == R.id.nav_honestStories) {
+            Intent i=new Intent(HomeActivity.this,RetrieveHonestStory.class);
+            startActivity(i);
 
         } else if (id == R.id.nav_location) {
             Intent i=new Intent(HomeActivity.this,MapsActivity.class);
             startActivity(i);
 
         } else if (id == R.id.nav_manageAccount) {
+            Intent i=new Intent(HomeActivity.this,ManageAccountActivity.class);
+            startActivity(i);
 
         } else if (id == R.id.nav_questionnaire) {
 
@@ -160,10 +164,10 @@ public class HomeActivity extends AppCompatActivity
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray jsonArray = jsonObject.getJSONArray("stories");
 
-                    int  sid=0;
-                    String username="",title="",description="",privacy="",u="Anonymous";
+                    int  sid=0,views=0;
+                    String username="",title="",description="",privacy="",u="Anonymous",category ="";
 
-                    for(int i=0;i<jsonArray.length();i++){
+                    for(int i=0;i<jsonArray.length();i++) {
                         JSONObject jObj = jsonArray.getJSONObject(i);
 
                         username = jObj.getString("name");
@@ -171,15 +175,21 @@ public class HomeActivity extends AppCompatActivity
                         title = jObj.getString("storyTitle");
                         description = jObj.getString("storyDesc");
                         privacy = jObj.getString("privacy");
+                        category = jObj.getString("category");
+                        views = jObj.getInt("views");
 
-                        if(privacy.equals("Anonymous")){
-                            stories.add(new StoryBean(0,sid,title,null,null,description,null,null,null,u));
-                        }else{
-                            Log.i("name",username);
-                            stories.add(new StoryBean(0,sid,title,null,null,description,null,null,null,username));
+                        if (category.equals("Corrupt")) {
+
+                            if (privacy.equals("Anonymous")) {
+                                stories.add(new StoryBean(0, sid, title, null, null, description, null, null, null, u,views));
+                            } else {
+                                Log.i("name", username);
+                                stories.add(new StoryBean(0, sid, title, null, null, description, null, null, null, username,views));
+                            }
+
                         }
-
                     }
+
                     adapter = new StoryAdapter(HomeActivity.this,R.layout.stories_list_item,stories);
 
                     listStories.setAdapter(adapter);

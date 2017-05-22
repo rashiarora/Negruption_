@@ -110,22 +110,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                         ll.add(latlng);
 
                                         mMap.addMarker(new MarkerOptions().position(latlng).title(location));
-                                        mMap.moveCamera(CameraUpdateFactory.newLatLng(india));
+                                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(india,3.89F));
 
 
                                     }
-                                    /*for(int j =0;j<ll.size();j++){
-                                        mMap.addMarker(new MarkerOptions().position(latlng).title(location));
-                                        mMap.moveCamera(CameraUpdateFactory.newLatLng(latlng));
-
-                                    }*/
 
                                 }
 
 
                             } catch (IOException e) {
                                 e.printStackTrace();
-                                // handle the exception
 
                             }
                         }
@@ -154,10 +148,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
         requestQueue.add(request);
 
-        // Add a marker in Sydney and move the camera
-       /* LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));*/
+
     }
 
 

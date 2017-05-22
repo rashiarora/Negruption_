@@ -14,6 +14,7 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -33,11 +34,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     Button register;
     RadioButton male,female;
 
-    User user;
+    User user,rcvUser,uIntent;
      RequestQueue requestQueue;
+    boolean updateMode;
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+
 
 
     public void init(){
@@ -53,6 +56,26 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         register=(Button)findViewById(R.id.btnRegister1);
 
         requestQueue= Volley.newRequestQueue(this);
+        Intent rcv = getIntent();
+        updateMode = rcv.hasExtra("keyUser");
+        if(updateMode){
+            rcvUser = (User)rcv.getSerializableExtra("keyUser");
+            name.setText(rcvUser.getName());
+            phone.setText(rcvUser.getPhone());
+            email.setText(rcvUser.getEmail());
+            username.setText(rcvUser.getUsername());
+            password.setText(rcvUser.getPassword());
+
+
+            if(rcvUser.getGender().equals("Male")){
+                male.setChecked(true);
+            }else{
+                female.setChecked(true);
+            }
+
+
+            register.setText("Update");
+        }
 
     }
     @Override
@@ -68,6 +91,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         sharedPreferences=getSharedPreferences(Util.PREFS_NAME,MODE_PRIVATE);
         editor=sharedPreferences.edit();
 
+
+
     }
 
     @Override
@@ -82,6 +107,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             user.setPassword(password.getText().toString().trim());
 
            insertIntoCloud();
+
 
 
         }
@@ -105,7 +131,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
 
     public void insertIntoCloud() {
-        final StringRequest stringRequest=new StringRequest(Request.Method.POST, Util.INSERT_USER, new Response.Listener<String>() {
+        String url="";
+
+        if(!updateMode){
+            url = Util.INSERT_USER;
+        }else{
+            url = Util.UPDATE_USER;
+        }
+
+
+        final StringRequest stringRequest=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
@@ -118,16 +153,20 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     if (success==1){
                         Toast.makeText(RegisterActivity.this,message,Toast.LENGTH_LONG).show();
 
+                      if(!updateMode) {
+                          editor.putInt(Util.PREFS_KEYUSERID, id);
+                          editor.putString(Util.PREFS_KEYUSERNAME, user.getUsername());
+                          editor.putString(Util.PREFS_KEYPASSWORD, user.getPassword());
 
-                        editor.putInt(Util.PREFS_KEYUSERID,id);
-                        editor.putString(Util.PREFS_KEYUSERNAME,user.getUsername());
-                        editor.putString(Util.PREFS_KEYPASSWORD,user.getPassword());
+                          editor.commit();
 
-                        editor.commit();
-
-                        Intent intent=new Intent(RegisterActivity.this,HomeActivity.class);
-                        startActivity(intent);
-                        finish();
+                          Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
+                          //intent.putExtra("currentUser",user);
+                          startActivity(intent);
+                          finish();
+                      }
+                        if(updateMode)
+                            finish();
 
                     }
                     else {
@@ -157,6 +196,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> map=new HashMap<>();
+                if(updateMode)
+                    map.put("id",String.valueOf(rcvUser.getId()));
+
                 map.put("name1",user.getName());
                 map.put("phone1",user.getPhone());
                 map.put("email1",user.getEmail());
@@ -170,6 +212,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             }
 
         };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(50000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        Volley.newRequestQueue(this).add(stringRequest);
+        requestQueue.add(stringRequest);
 
         requestQueue.add(stringRequest);
          clear();

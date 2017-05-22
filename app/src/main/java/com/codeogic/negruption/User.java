@@ -1,10 +1,12 @@
 package com.codeogic.negruption;
 
+import java.io.Serializable;
+
 /**
  * Created by win-7 on 5/3/2017.
  */
 
-public class User {
+public class User implements Serializable{
 
 
     int id;

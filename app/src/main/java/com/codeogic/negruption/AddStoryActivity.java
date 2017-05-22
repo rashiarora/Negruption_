@@ -49,9 +49,6 @@ public class AddStoryActivity extends AppCompatActivity implements View.OnClickL
     @InjectView(R.id.spinnerCities)
     Spinner spinnerMainCities;
 
-    @InjectView(R.id.spinnerStates)
-    Spinner spinnerMainStates;
-
     @InjectView(R.id.spinnerDepartment)
     Spinner spinnerDepartment;
 
@@ -143,10 +140,6 @@ public class AddStoryActivity extends AppCompatActivity implements View.OnClickL
        }
 
     }
-
-
-
-
 
 
     public void setDepartment(){
@@ -248,7 +241,7 @@ public class AddStoryActivity extends AppCompatActivity implements View.OnClickL
 
 
 
-        spinnerMainStates.setAdapter(arrayAdapterStates);
+       /* spinnerMainStates.setAdapter(arrayAdapterStates);
 
         spinnerMainStates.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -263,7 +256,7 @@ public class AddStoryActivity extends AppCompatActivity implements View.OnClickL
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
     }
 
 

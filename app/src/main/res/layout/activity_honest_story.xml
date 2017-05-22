@@ -1,9 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.codeogic.negruption.HonestStoryActivity">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ADD HONEST STORIES "
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimaryDark"
+        />
 
-</android.support.constraint.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/addstory1"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+
+            android:padding="10dp"
+            android:text="Add Your Honest Experience Description"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="15dp" />
+
+        <Spinner
+            android:id="@+id/spinnerDepartment_Honest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+
+        </Spinner>
+
+
+        <Spinner
+            android:id="@+id/spinnerCities_Honest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+        </Spinner>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint=" Title Of Your Story"
+            android:id="@+id/editTextStoryTitle_Honest"
+
+            />
+
+        <EditText
+            android:id="@+id/editTextStory_Honest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:hint="Your Story Description Here"
+            android:inputType="textMultiLine" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Anonymous"
+            android:id="@+id/chkAnym_Honest"/>
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonUpload_Honest"
+            android:text="Upload"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            />
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
+
+

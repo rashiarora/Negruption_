@@ -23,7 +23,7 @@ public class StoryBean implements Serializable {
     public StoryBean() {
     }
 
-    public StoryBean(int userId, int storyId, String storyTitle, String department, String place, String storyDesc, String imageProof, String audioProof, String videoProof, String username) {
+    public StoryBean(int userId, int storyId, String storyTitle, String department, String place, String storyDesc, String imageProof, String audioProof, String videoProof, String username,int views) {
         UserId = userId;
         this.storyId = storyId;
         this.storyTitle = storyTitle;
@@ -34,6 +34,7 @@ public class StoryBean implements Serializable {
         this.audioProof = audioProof;
         this.videoProof = videoProof;
         this.username = username;
+        this.views = views;
     }
 
     public int getUserId() {
